@@ -38,3 +38,10 @@ function vectorOrthogonal(x, y){
 function vectorLength(x, y){
     return Math.sqrt(x * x + y * y);
 }
+
+/////////////////////////// Color /////////////////////////////
+function cosmic(t) {
+  const hue = (300 + 60 * Math.sin(t * 1.5)) % 360;
+  const light = 40 + 20 * Math.sin(t * 2);
+  return `hsl(${hue}, 100%, ${light}%)`;
+}

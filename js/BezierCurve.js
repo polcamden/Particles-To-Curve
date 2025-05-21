@@ -20,7 +20,7 @@ class BezierCurve{
 		}
 	}
 
-	draw(){
+	draw(ctx){
 		for (var i = 0; i < this.count; i++) {
 			//first point
 			const pi1 = i * 3 + 1;
@@ -94,13 +94,48 @@ class BezierCurve{
 		}
 	}
 
+	pointOnCurve(t){
+		t = t % 1;
+		const i = Math.trunc(t * this.count);
+		t = t * this.count - i;
+		
+		//first point
+		const pi1 = i * 3 + 1;
+		const px1 = this.x[pi1];
+		const py1 = this.y[pi1];
+		//first handle between p1 and p2
+		const hi1 = i * 3 + 2;
+		const hx1 = this.x[hi1];
+		const hy1 = this.y[hi1];
+		//second point
+		const pi2 = (i * 3 + 4) % (this.count * 3);
+		const px2 = this.x[pi2];
+		const py2 = this.y[pi2];
+		//second handle between p1 and p2
+		const hi2 = (i * 3 + 3) % (this.count * 3);
+		const hx2 = this.x[hi2];
+		const hy2 = this.y[hi2];
+
+		const oneMinusT = 1 - t;
+
+		const x = Math.pow(oneMinusT, 3) * px1 +
+		3 * Math.pow(oneMinusT, 2) * t * hx1 +
+		3 * oneMinusT * Math.pow(t, 2) * hx2 +
+		Math.pow(t, 3) * px2;
+
+		const y = Math.pow(oneMinusT, 3) * py1 +
+		3 * Math.pow(oneMinusT, 2) * t * hy1 +
+		3 * oneMinusT * Math.pow(t, 2) * hy2 +
+		Math.pow(t, 3) * py2;
+
+		return { x, y };
+	}
+
 	select(x, y){
 		//select obj if close
 		for(var i = 0; i < this.x.length; i++){
 			const diff = vectorDifference(this.x[i], this.y[i], x, y);
 			const dist = vectorLength(diff.x, diff.y);
-
-			console.log(dist);
 
 			if(dist < 12){
 				this.selection = i;
@@ -128,7 +163,8 @@ class BezierCurve{
 	}
 }
 
-const curve = new BezierCurve(2);
+///tester
+/*const curve = new BezierCurve(2);
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
@@ -144,9 +180,6 @@ function testUpdate(){
 	curve.draw();
 	requestAnimationFrame(testUpdate);
 }
-
-var isDragging = false;
-let offset = { x: 0, y: 0 };
 
 canvas.addEventListener("mousedown", (e) => {
 	const x = e.clientX;
@@ -168,4 +201,4 @@ canvas.addEventListener("mouseup", () => {
 
 canvas.addEventListener("mouseleave", () => {
 	curve.deselect();
-});
+});*/

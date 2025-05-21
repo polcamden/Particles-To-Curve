@@ -5,10 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Paticles to Curves</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <canvas id="canvas" width="800" height="800" style="border:1px solid #ccc;"></canvas>
+  <div class="canvas-container">
+    <canvas id="simulationCanvas"></canvas>
+    <canvas id="overlayCanvas"></canvas>
+  </div>
+  
+  <div class="option-menu">
+    <h1>Particles To Curve</h1>
+    <div class="combo">
+      <h2>Number of particle</h2>
+      <input type="number" id="fname" name="fname" class="number">
+    </div>
+    
+    <div class="combo">
+      <h2>Attraction Force</h2>
+      
+    </div>
+    <input type="range" min="0" max="100" value="99" class="slider">
+
+    <div class="combo">
+      <h2>Dampening Force</h2>
+      
+    </div>
+    <input type="range" min="0" max="100" value="99" class="slider">
+
+
+  </div>
   <script src="js/BezierCurve.js"></script>
   <script src="js/GeometryF.js"></script>
+  <script src="js/Main.js"></script>
 </body>
 </html>
