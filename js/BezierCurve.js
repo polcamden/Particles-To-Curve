@@ -1,6 +1,7 @@
 class BezierCurve{
 	constructor(count) {
 		this.count = count;
+		this.selection = -1;
 		this.x = []; // handle, point, handle
 		this.y = [];
 
@@ -93,8 +94,37 @@ class BezierCurve{
 		}
 	}
 
-	input(x, y){
+	select(x, y){
+		//select obj if close
+		for(var i = 0; i < this.x.length; i++){
+			const diff = vectorDifference(this.x[i], this.y[i], x, y);
+			const dist = vectorLength(diff.x, diff.y);
 
+			console.log(dist);
+
+			if(dist < 12){
+				this.selection = i;
+				break;
+			}
+		}
+
+		//Todo: create point if click is on curve
+	}
+
+	deselect(){
+		this.selection = -1;
+	}
+
+	input(x, y){
+		this.x[this.selection] = x;
+		this.y[this.selection] = y;
+
+		/*if(this.selection % 3 == 1){ Todo: make handles follow anchor
+			this.x[this.selection-1] = x;
+			this.y[this.selection-1] = y;
+			this.x[this.selection+1] = x;
+			this.y[this.selection+1] = y;
+		}*/
 	}
 }
 
@@ -119,40 +149,23 @@ var isDragging = false;
 let offset = { x: 0, y: 0 };
 
 canvas.addEventListener("mousedown", (e) => {
-    const rect = canvas.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
+	const x = e.clientX;
+	const y = e.clientY;
 
-    if (
-      mouseX >= box.x &&
-      mouseX <= box.x + box.width &&
-      mouseY >= box.y &&
-      mouseY <= box.y + box.height
-    ) {
-      isDragging = true;
-      offset.x = mouseX - box.x;
-      offset.y = mouseY - box.y;
-    }
-  });
+	curve.select(x, y);
+});
 
-  // Mouse move = update box position if dragging
-  canvas.addEventListener("mousemove", (e) => {
-    if (isDragging) {
-      const rect = canvas.getBoundingClientRect();
-      const mouseX = e.clientX - rect.left;
-      const mouseY = e.clientY - rect.top;
+canvas.addEventListener("mousemove", (e) => {
+	const x = e.clientX;
+	const y = e.clientY;
 
-      box.x = mouseX - offset.x;
-      box.y = mouseY - offset.y;
-      drawBox();
-    }
-  });
+	curve.input(x, y);
+});
 
-  // Mouse up = stop drag
-  canvas.addEventListener("mouseup", () => {
-    isDragging = false;
-  });
+canvas.addEventListener("mouseup", () => {
+	curve.deselect();
+});
 
-  canvas.addEventListener("mouseleave", () => {
-    isDragging = false;
-  });
+canvas.addEventListener("mouseleave", () => {
+	curve.deselect();
+});
