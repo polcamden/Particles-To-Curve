@@ -65,11 +65,11 @@ canvas {
 }
 
 .slider {
-  -webkit-appearance: none; /* Remove default styles (WebKit) */
+  -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 20px; /* height of outer rectangle (track) */
-  background: transparent; /* we'll style the track separately */
+  height: 20px;
+  background: transparent;
   cursor: pointer;
   border-radius: 12px;
 }
@@ -114,8 +114,8 @@ canvas {
 
 .combo{
   display: grid;
-  grid-template-columns: 2fr 1fr; /* or whatever proportion you want */
-  gap: 1rem; /* optional spacing between columns */
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem; 
   margin-top: 12px;
 }
 
