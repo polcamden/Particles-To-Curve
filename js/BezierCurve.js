@@ -134,8 +134,8 @@ class BezierCurve{
 	select(x, y){
 		//select obj if close
 		for(var i = 0; i < this.x.length; i++){
-			const diff = vectorDifference(this.x[i], this.y[i], x, y);
-			const dist = vectorLength(diff.x, diff.y);
+			const diff = GeometryF.vectorDifference(this.x[i], this.y[i], x, y);
+			const dist = GeometryF.vectorLength(diff.x, diff.y);
 
 			if(dist < 12){
 				this.selection = i;

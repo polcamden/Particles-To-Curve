@@ -130,3 +130,23 @@ h2{
   margin-top: 8px;
   margin-bottom: 8px;
 }
+
+.footer{
+  position: absolute; 
+  bottom: 0;
+  right: 0;
+  margin: 12px;
+}
+
+button{
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  background-color: #282828;
+  border: 1px solid #212121;
+  border-style: none;
+  border-radius: 12px;
+  border-width: 1px;
+  font-size: 24px;
+}
