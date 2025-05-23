@@ -30,11 +30,13 @@ function start(){
 
 function update(){
     //overlay
-    overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
-	curve.draw(overlayCtx);
+    if(overlayEnabled){
+        overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+        curve.draw(overlayCtx);
+    }
 
-    simulationCtx.fillStyle = "rgba(0, 0, 0, 0.002)";
-    simulationCtx.fillRect(0, 0, simulationCanvas.width, simulationCanvas.height);
+    /*simulationCtx.fillStyle = "rgba(0, 0, 0, 0.01)";
+    simulationCtx.fillRect(0, 0, simulationCanvas.width, simulationCanvas.height);*/
     
     //simulation
     for (let i = 0; i < particles.length; i++) {
@@ -55,6 +57,16 @@ function resizeCanvases() {
 
     overlayCanvas.width = simulationCanvas.width = width;
     overlayCanvas.height = simulationCanvas.height = height;
+}
+
+var overlayEnabled = true;
+function toggleOverlay(){
+    if(overlayEnabled){
+        overlayEnabled = false;
+        overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+    }else{
+        overlayEnabled = true;
+    }
 }
 
 overlayCanvas.addEventListener("mousedown", (e) => {

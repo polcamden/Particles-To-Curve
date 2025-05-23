@@ -30,13 +30,13 @@ class Particle{
 
     draw(followX, followY, ctx){
         let width = 0;
-        let color = GeometryF.cosmic(time * 2);
+        let color = /*GeometryF.cosmic(time * 2)*/ 'black';
 
         const offset = GeometryF.vectorDifference(this.posX, this.posY, followX, followY);
         const dist = GeometryF.vectorLength(offset.x, offset.y);
         width = dist * dist  / 3000 + 32;
 
-        ctx.strokeStyle = 'rgb(255, 255, 255, 0.5)';
+        ctx.strokeStyle = GeometryF.cosmic(time * 2)/*'rgb(255, 255, 255, 0.5)'*/;
         ctx.lineWidth = 0.1;
         ctx.stroke();
 
