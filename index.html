@@ -14,10 +14,23 @@
     <canvas id="simulationCanvas"></canvas>
     <canvas id="overlayCanvas"></canvas>
   </div>
-  
-  <div class="option-menu">
-    <h1>Particles To Curve</h1>
 
+  <div id="option-menu">
+    <h1>Particles To Curve</h1>
+    <details>
+      <summary>
+        <span class="menu-header">Curve</span>
+        <span class="arrow">▶</span>
+      </summary>
+      <div class="content">
+        <div class="combo">
+          <h3>Attraction Point Speed</h3>
+          <h3 class="value">99</h3>
+        </div>
+        <input type="range" min="0" max="100" value="20" class="slider" id="curve-speed">
+      </div>
+    </details>
+    <hr>
     <details>
       <summary>
         <span class="menu-header">Particles</span>
@@ -26,20 +39,20 @@
       <div class="content">
         <div class="combo">
           <h3>Number of particle</h3>
-          <input type="number" id="fname" name="fname" class="number" value="3">
+          <input type="number" value="3" class="number" id="particle-num">
         </div>
         
         <div class="combo">
           <h3>Attraction Force</h3>
           <h3 class="value">99</h3>
         </div>
-        <input type="range" min="0" max="100" value="99" class="slider">
+        <input type="range" min="0" max="500" value="5" class="slider" id="att-force">
 
         <div class="combo">
           <h3>Dampening Force</h3>
           <h3 class="value">99</h3>
         </div>
-        <input type="range" min="0" max="100" value="99" class="slider">
+        <input type="range" min="0" max="100" value="98" class="slider" id="damp-force">
       </div>
     </details>
     <hr>
@@ -54,15 +67,18 @@
     
     <div class="footer" id="left">
       <button onclick="start()"><img src="icons/restart.svg" class="icon"></button>
-      <button onclick="start()"><img src="icons/random.svg" class="icon"></button>
+      <button onclick="randomInput()"><img src="icons/random.svg" class="icon"></button>
     </div>
     <div class="footer" id="right">
       <button onclick="toggleOverlay()"><img src="icons/hide.svg" class="icon"></button>
-      <button onclick="start()"><img src="icons/arrow-right.svg" class="icon"></button>
+      <button onclick="toggleOption()"><img src="icons/arrow-right.svg" class="icon"></button>
     </div>
-
-    
   </div>
+  
+  <div class="footer" id="right">
+    <button onclick="toggleOption()"><img src="icons/menu.svg" class="icon"></button>
+  </div>
+
   <script src="js/GeometryF.js"></script>
   <script src="js/Particle.js"></script>
   <script src="js/BezierCurve.js"></script>

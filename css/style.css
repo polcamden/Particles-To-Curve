@@ -63,7 +63,7 @@ canvas {
   z-index: 1;
 }
 
-.option-menu{
+#option-menu{
   position: fixed;
   top: 0;
   right: -2px;
@@ -77,6 +77,11 @@ canvas {
   border: 0.5px solid rgba(255, 255, 255, 0.6);
   z-index: 9999;
   box-sizing: border-box;
+  transition: transform 0.5s ease-out;
+}
+
+.hide-option {
+  transform: translateX(400px);
 }
 
 /*drop box*/
@@ -231,6 +236,7 @@ details[open] .arrow {
 
 #right{
   right: 0px;
+   z-index: 9998;
 }
 
 .icon{

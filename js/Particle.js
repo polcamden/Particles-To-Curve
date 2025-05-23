@@ -13,7 +13,7 @@ class Particle{
         const forceNormal = GeometryF.vectorNormalize(vect.x, vect.y);
         const dist = GeometryF.vectorLength(vect.x, vect.y);
 
-        const finalAcc = Math.min(dist / 10000, 0.0005);
+        const finalAcc = Math.min(dist / 10000, 0.0001 * attractionForce);
 
         this.accX = forceNormal.x * dist * finalAcc;
         this.accY = forceNormal.y * dist * finalAcc;
@@ -21,8 +21,8 @@ class Particle{
         this.velX += this.accX;
         this.velY += this.accY;
 
-        this.velX *= 0.98;
-        this.velY *= 0.98;
+        this.velX *= dampeningForce / 100;
+        this.velY *= dampeningForce / 100;
 
         this.posX += this.velX;
         this.posY += this.velY;
